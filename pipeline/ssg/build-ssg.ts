@@ -58,6 +58,29 @@ ${urls}
   console.log(`Generated: ${outputPath}`);
 };
 
+const writeHeaders = async (): Promise<void> => {
+  const outputPath = path.join(distDir, "_headers");
+
+  const text = `
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; img-src 'self' data: https://img.shields.io; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self';
+
+# HTML (entry points)
+ /*
+  Cache-Control: no-cache
+
+# Static assets (hashed files)
+ /assets/*
+  Cache-Control: public, max-age=31536000, immutable
+`;
+
+  await fs.promises.writeFile(outputPath, text.trim(), "utf-8");
+  console.log(`Generated: ${outputPath}`);
+};
+
 // -----------------
 // -- Main
 // -----------------
@@ -79,7 +102,7 @@ const main = async (): Promise<void> => {
     );
 
     // 2. Generate supplemental SEO files
-    await Promise.all([writeRobots(), writeSitemap(routes)]);
+    await Promise.all([writeRobots(), writeSitemap(routes), writeHeaders()]);
 
     console.log("✅ SSG Complete!");
   } catch (error) {
