@@ -66,7 +66,7 @@ const writeHeaders = async (): Promise<void> => {
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Strict-Transport-Security: max-age=31536000; includeSubDomains
-  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; img-src 'self' data: https://img.shields.io; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self';
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; img-src 'self' data: https://img.shields.io; media-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline';
   Cache-Control: no-cache
 
 /assets/*
