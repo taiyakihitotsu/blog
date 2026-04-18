@@ -60,7 +60,7 @@ ${urls}
 
 const writeHeaders = async (): Promise<void> => {
   const outputPath = path.join(distDir, "_headers");
-  
+
   const text = `
 /*
   X-Content-Type-Options: nosniff
