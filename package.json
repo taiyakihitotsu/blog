@@ -1,0 +1,71 @@
+{
+  "name": "blog-project",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --config vite.config.dev.ts",
+    "build": "vite build && vite-node ./pipeline/ssg/build-ssg.ts",
+    "build:test": "pnpm build && vite-node ./pipeline/ssg/verify-ssg.ts && exec playwright test",
+    "build:finally": "sh pipeline/build-content.sh",
+    "preview": "pnpm vite preview",
+    "serve": "npx serve dist",
+    "type": "tsc -p tsconfig.app.json --noEmit",
+    "type:test": "tsc -p tsconfig.test.json --noEmit",
+    "type:pipe": "tsc -p tsconfig.node.json --noEmit",
+    "type:playwright": "tsc -p tsconfig.playwright.json --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
+    "test:ui": "exec playwright test",
+    "test:pipe": "exec tsx pipeline/ssg/verify-ssg.ts",
+    "format": "biome format --write . && biome check --write .",
+    "lint": "biome lint .",
+    "lint/fix": "biome lint --write .",
+    "submodule:update": "git submodule update --remote --merge"
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx}": [
+      "pnpm biome ci",
+      "bash -c 'pnpm type'",
+      "bash -c 'pnpm type:test'",
+      "bash -c 'pnpm type:pipe'",
+      "bash -c 'pnpm type:playwright'",
+      "bash -c 'pnpm test'",
+      "bash -c 'pnpm test:pipe",
+      "bash -c 'pnpm test:ui'"
+    ]
+  },
+  "dependencies": {
+    "@gsap/react": "^2.1.2",
+    "@taiyakihitotsu/foxp": "0.5.10",
+    "github-markdown-css": "^5.8.1",
+    "gsap": "^3.14.2",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "zustand": "^5.0.12"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.8",
+    "@hono/vite-dev-server": "^0.25.1",
+    "@hono/vite-ssg": "^0.3.3",
+    "@mdx-js/rollup": "^3.0.1",
+    "@playwright/test": "1.59.1",
+    "@shikijs/rehype": "^1.1.7",
+    "@taiyakihitotsu/cion": "0.3.4",
+    "@types/mdast": "^4.0.4",
+    "@types/node": "^25.5.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@types/unist": "^3.0.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "cheerio": "1.2.0",
+    "lint-staged": "^16.4.0",
+    "playwright-lighthouse": "4.0.0",
+    "remark-gfm": "^4.0.0",
+    "tsx": "^4.21.0",
+    "type-fest": "5.5.0",
+    "typescript": "6.0.2",
+    "vite": "^8.0.3",
+    "vite-node": "^6.0.0",
+    "vitest": "^4.1.2"
+  }
+}

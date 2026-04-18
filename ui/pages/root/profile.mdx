@@ -1,0 +1,78 @@
+Prevent unintentional UI layout bugs **at compile-time** - *A proof-of-concept demonstrating compile-time layout safety*
+  
+**Demo**: Layout violations produce compile-time type errors.
+
+<Video src="/assets/foxp-layout-rec.mp4" alt="Demo" />
+
+[About this site]( #about-this-site) | [Articles]( #roundedContent-typescript )
+
+# About Me
+**taiyakihitotsu**  
+TypeScript Engineer - Build reliable frontend systems using type-driven design | Clojure & Functional Programming
+
+> **🚀 OPEN TO WORK — Seeking remote TypeScript-first Frontend engineering roles.**
+> 
+> **Experience**  
+> Ex-Lead Engineer who led a team of ~5 engineers and helped eliminate entire classes of frontend bugs through type-driven architecture. 
+> Strengthened system reliability by leading an **80% codebase refactor** using [fp-ts]( https://github.com/gcanti/fp-ts ), reducing onboarding friction and preventing entire categories of runtime bugs through type-driven design.
+>
+> **Tech Stack**  
+> [This site]( #about-this-site ): TypeScript, React, Zustand, GSAP  
+> Additional: fp-ts, Next.js, Jotai, Redux, Framer Motion, anime.js, zod
+>
+> **Contact/Location**   
+> Contact: [GitHub (Email available on profile)]( https://github.com/taiyakihitotsu )  
+> Location: Tokyo, Japan (UTC+09:00) - Remote (Flexible across time zones)
+## OSS Contributions
+Active contributor to [sindresorhus/type-fest]( https://github.com/sindresorhus/type-fest ), a widely-used TypeScript utility types library.  
+- Improved `IsEqual` to handle complex edge cases (for Union/Intersection types).
+- Contributed fixes to core utility types.
+
+[![type-fest](https://img.shields.io/badge/dynamic/json?color=blueviolet&label=type-fest/Merged%20PRs&query=%24.total_count&url=https%3A%2F%2Fapi.github.com%2Fsearch%2Fissues%3Fq%3Drepo%3Asindresorhus%2Ftype-fest%2Bauthor%3Ataiyakihitotsu%2Bis%3Apr%2Bis%3Amerged)]( https://github.com/sindresorhus/type-fest/pulls?q=is%3Apr+author%3Ataiyakihitotsu+is%3Amerged )
+
+## Projects
+### foxp
+[Playground]( https://www.typescriptlang.org/play/?#code/JYWwDg9gTgLgBAbzgMwgDzHAviqERwDkAAjAIbACeZA1sABbAwQwDOArgPSoaEBQfTgCo4AE2AA3ALQAjSlIBeAUzxwhnAQGMIAO1bxxEuAF4U6MADoZwC4YAUASi279YyQH0INE3zhuJdr5+ZhgWYOwwAApQoHYAzA4ANEF+PJbhUTEgdgBMTn4OFhJkADbsSs56Bh4qUD5+9kGcnHCkrFJKGEqaMB1QeFAAXCkh6RHRsQnJwaNh41l2AAz5cIXFZRWCIlBkOgDmSmoafDCUYIcASrsHi8wAjIsms2BQShZX+0oAPIuJcA8APkqrh2n083mMQTSVhswB0mi+Hxu90WAMcgRm0IyE2yAFYVk4+NoqnBQQd3LV6rNrBY4QikUpbhBAeimi02h0uj0+gNhpjzHNMrEcssgoTiSDrkp3CA4RT+lToTS6YipUyWQ4MXBmq02JzztzatA+cEsfNYlI7gSBMI4AdenCjkSXPAQGQwO57QBJHQwJT6dw6f0wdwAdyY9HceHcJSUZGQioFNO9OkcIzszwiF260FEdmheDsCDIgzgAG1fjkALp-GSlnI4MisOASmAOFZ+P5mmAANW6djLhEGZEIfzuVbgTZbLvbwNd7s9ShgPr9AaDAYgEU8yHcMk3OlEj0hqSTNhTab8Oo5nQNvSNQ3TmZg2e0UDzBYgRZL5crNbgdbgBtJ2bVtZxmLsBQyPtNAHIdNEICcp1AwlbRAFQDidE4zkOABZdClFEJ4sVeCw8KgA4ABV2DAWMvjLYi3gAcVeMg-SgL4cgBCDQheN4ABl-VYL4ABYASrIFWzgdhWBUAARSQiNPWxJC+MiDlENEUJaYwATgOJODiZ0SWkuSPHWYBCOPKSZKgeSAhGbscXiFZuLGIVsgSNZSnKOdrNMiR3DhczLKCEzbMkQIrz1G9ujvfpjQcyDzQ8lynycgBOdsim8pQgA ) | [Source]( https://github.com/taiyakihitotsu/foxp )
+
+**Type-safe validation library for eliminating runtime errors**
+
+Reject invalid states (e.g., division by zero, invalid email patterns, layout conflicts) **before execution**.
+
+```typescript
+const div = foxp.bi.div() // Use builtin provided by foxp.
+div(foxp.putPrim(3), foxp.putPrim(2)).value //=> 3/2
+// @ts-expect-error: Enforce non-zero divisor at compile-time.
+div(foxp.putPrim(3), foxp.putPrim(0)).value
+```
+```typescript
+const invalid_email = foxp.putPrim('invalid-url')
+// @ts-expect-error: Reject invalid url at compile-time.
+foxp.tid<pre.IsEmail>()(invalid_email)
+```
+### cion
+[Playground]( https://www.typescriptlang.org/play/?#code/JYWwDg9gTgLgBDAnmApnAwsCA7OAzKCEOAcgAEYBDYRSga2AAtgYIYBnAVwHoBjLbCQBQQ7gCoxcAMqgwAGzSUoLRiBQxgvOGO5DeOdvCmcQAfQCsALgwCAdABlg7MAB4SACgDUcAExwAzACUJAB8cAC8pObC3NxwFOwAtCgAHqi8MMlQhFB6BkYmFqYo2dDWmDgOTq4e3n5BoRGkAGzCohJwACLAAG5OAnDaukioXb2mfpEV2FXObu5xABxwACzBIaJxgwB6APxwAEQ+B0IjaN09poum-k3TszULcACMzXDN65uDcHuHi9z+E5nMaXbDAOR3OyOOYeOJ+AAMn1i31+BzBchO7UkADEQJQwENTsg0PYILxKHJseCYCUmh48NTae48LgANopAC6cHcYRSvkCAuEwNJ5LkAFl8XT3HiCcy2ZzuZI+T4BcE4ETRgA1FC8UzNK6QyrQ1wAA3ciRCYVZz18AVWXIAJABvEUUqlyGlQAC+cGdrvF+K9gRNG2RO32B1Zb0WHMx4kkpIgBIA7ip8LhvAp4DoNSSyW7cJF6WyoHAFe5gHhuSFIvCy4E4KXmdzvKXng3zWWXqrgrm4ImwKYVoaZsaXGas3BWVW-fnKdgvVzmzagsHQ1sfhGVidkQlkmkdZkSjk8thDP2IEmh8VSlBrAOh3T-G143AAEooADmqUJwI-35SUxKAAIy0KYoWqcd3CgFBEgZbAABNSFZShEgALw5TwSFIEDeGeHxnzXL5w0OEhcJIHc4j3VJ0iPW9T3Pf9UiA0CbxyawmMA3C6WEIA ) | [Source]( https://github.com/taiyakihitotsu/cion )
+
+**Type-level Lisp interpreter** - fully developed at the type level.
+
+```typescript
+const test_in_doc_a1: Cion.Lisp<`(/ 2 3)`> = '2/3'
+// @ts-expect-error: Type '"0"' is not assignable to type '"nil"'.
+const test_in_doc_a2_err: Cion.Lisp<`(/ 2 0)`> = '0'
+```
+
+### clojure-patched
+[Source]( https://github.com/taiyakihitotsu/clojure-patched ) - Custom patches for Clojure, maintained via Gentoo Portage.
+
+# About this site
+Leveraging `cion` and `foxp` to prevent unintended UI layout collisions.  
+This replaces manual inspection with automated, type-safe guarantees.
+
+Core Principles:
+- **Code-First**: All article snippets are validated.
+- **Compile-Time Safety**: Eliminating critical UI errors before runtime.
+- **Minimalist Architecture**: Markdown-based content delivered via SSG.
+
+**Pipeline**: Code-driven content -> Markdown (mdx) -> Type check (TypeScript/cion/foxp) -> UI (React/GSAP/Zustand) -> SSG (Vite)
+
+**Content**: [Repository]( https://github.com/taiyakihitotsu/blog ) | [Report Issues]( https://github.com/taiyakihitotsu/blog/issues )  
+**License**: [BSD 3-Clause License]( https://opensource.org/license/bsd-3-clause ) | [CC BY 4.0]( https://creativecommons.org/licenses/by/4.0/ )

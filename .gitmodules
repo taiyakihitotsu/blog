@@ -1,0 +1,3 @@
+[submodule "content/typescript"]
+	path = content/typescript
+	url = git@github.com:taiyakihitotsu/memo.git
