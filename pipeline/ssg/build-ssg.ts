@@ -100,10 +100,10 @@ const main = async (): Promise<void> => {
     // 2. Generate supplemental SEO files
     await Promise.all([writeRobots(), writeSitemap(routes), writeHeaders()]);
 
-    console.log("✅ SSG Complete!");
+    console.log("SSG Complete!");
   } catch (error) {
     // Immediate shutdown to ensure the build process fails correctly.
-    console.error("❌ SSG Failed:", error);
+    console.error("SSG Failed:", error);
     process.exit(1);
   }
 };

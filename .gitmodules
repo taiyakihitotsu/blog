@@ -1,3 +1,6 @@
 [submodule "content/typescript"]
 	path = content/typescript
 	url = git@github.com:taiyakihitotsu/memo.git
+[submodule "submodules/ascii-check"]
+	path = submodules/ascii-check
+	url = git@github.com:taiyakihitotsu/ascii-check.git

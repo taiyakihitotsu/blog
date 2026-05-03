@@ -1,0 +1,30 @@
+name: ASCII Check
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Babashka
+        run: |
+          curl -sLO https://raw.githubusercontent.com/babashka/babashka/master/install
+          chmod +x install
+          sudo ./install
+
+      - name: Grant execute permission to run.sh
+        run: chmod +x submodules/ascii-check/run.sh
+
+      - name: Run ASCII Check
+        shell: bash
+        run: bash check.sh

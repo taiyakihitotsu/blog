@@ -12,7 +12,7 @@ const verify = async () => {
 
   // Verify that HTML files were actually generated in `dist/`.
   if (files.length === 0) {
-    throw new Error("❌ No HTML files found in dist/");
+    throw new Error("No HTML files found in dist/");
   }
 
   const contents = new Map<string, { route: string; hash: string; title: string }>();
@@ -66,14 +66,14 @@ const verify = async () => {
   }
 
   if (errors.length > 0) {
-    console.error("\n❌ Verification Failed:");
+    console.error("\nVerification Failed:");
     errors.forEach((err) => {
       console.error(`  - ${err}`);
     });
     process.exit(1);
   }
 
-  console.log(`\n✅ Verification Passed! Checked ${contents.size} pages.`);
+  console.log(`\nVerification Passed! Checked ${contents.size} pages.`);
   console.table(Array.from(contents.values()).map((c) => ({ route: c.route, title: c.title })));
 };
 
